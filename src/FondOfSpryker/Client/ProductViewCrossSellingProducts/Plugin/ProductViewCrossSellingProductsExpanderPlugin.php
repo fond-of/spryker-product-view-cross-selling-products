@@ -12,6 +12,8 @@ use Spryker\Client\ProductStorageExtension\Dependency\Plugin\ProductViewExpander
 class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin implements ProductViewExpanderPluginInterface
 {
     public const MODEL = 'model';
+    public const MODEL_KEY = 'model_key';
+    public const SIZE_KEY = 'size';
 
     /**
      * Specification:
@@ -27,10 +29,13 @@ class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin imple
      */
     public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName)
     {
-        $results = $this->getFactory()->getCatalogClient()->catalogSearch(
-            '',
-            [self::MODEL => $productViewTransfer->getAttributes()[self::MODEL]]
-        );
+        $search = [self::MODEL => $productViewTransfer->getAttributes()[self::MODEL]];
+
+        if ($productViewTransfer->getAttributes()[self::MODEL_KEY] == 'crawling_shoe') {
+            $search[self::SIZE_KEY] = 'L';
+        }
+
+        $results = $this->getFactory()->getCatalogClient()->catalogSearch('', $search);
 
         return $productViewTransfer->setCrossSellingProducts($results);
     }
