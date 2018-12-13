@@ -31,9 +31,12 @@ class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin imple
     {
         $search = [self::MODEL => $productViewTransfer->getAttributes()[self::MODEL]];
 
-        if ($productViewTransfer->getAttributes()[self::MODEL_KEY] == 'crawling_shoe') {
+        /*
+         * @TODO: Check why it dosent work on stage
+         */
+        /*if ($productViewTransfer->getAttributes()[self::MODEL_KEY] == 'crawling_shoe') {
             $search[self::SIZE_KEY] = 'L';
-        }
+        }*/
 
         $results = $this->getFactory()->getCatalogClient()->catalogSearch('', $search);
 
