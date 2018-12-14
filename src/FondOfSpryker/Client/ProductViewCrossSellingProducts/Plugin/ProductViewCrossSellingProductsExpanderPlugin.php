@@ -29,14 +29,13 @@ class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin imple
      */
     public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName)
     {
+        $config = $this->getFactory()->createProductViewCrossSellingProductsFactory();
+        $modelKey = $productViewTransfer->getAttributes()[self::MODEL_KEY];
         $search = [self::MODEL => $productViewTransfer->getAttributes()[self::MODEL]];
 
-        /*
-         * @TODO: Check why it dosent work on stage
-         */
-        /*if ($productViewTransfer->getAttributes()[self::MODEL_KEY] == 'crawling_shoe') {
-            $search[self::SIZE_KEY] = 'L';
-        }*/
+        if (in_array($modelKey, $config->getFilterSizeForModelKeys())) {
+            $search[self::SIZE_KEY] = $config->getDefaultSize();
+        }
 
         $results = $this->getFactory()->getCatalogClient()->catalogSearch('', $search);
 
