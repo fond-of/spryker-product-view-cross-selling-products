@@ -11,6 +11,8 @@ interface ProductViewCrossSellingProductsConstants
     public const CROSS_SELLING_PRODUCTS_FILTER_SIZE_FOR = 'CROSS_SELLING_PRODUCTS_FILTER_SIZE_FOR';
 
     public const CROSS_SELLING_PRODUCTS_FILTER_SIZE_FOR_VALUES = [
-        'crawling_shoe'
+        'crawling_shoe',
     ];
+
+    public const MODEL_KEYS_FOR_SIZE_FILTER = 'MODEL_KEYS_FOR_SIZE_FILTER';
 }

@@ -2,8 +2,8 @@
 
 namespace FondOfSpryker\Client\ProductViewCrossSellingProducts;
 
-use Spryker\Client\Kernel\AbstractBundleConfig;
 use FondOfSpryker\Shared\ProductViewCrossSellingProducts\ProductViewCrossSellingProductsConstants;
+use Spryker\Client\Kernel\AbstractBundleConfig;
 
 class ProductViewCrossSellingProductsConfig extends AbstractBundleConfig
 {
@@ -21,11 +21,8 @@ class ProductViewCrossSellingProductsConfig extends AbstractBundleConfig
     /**
      * @return array
      */
-    public function getFilterSizeForModelKeys(): array
+    public function getModelKeysForSizeFilter(): array
     {
-        return $this->get(
-            ProductViewCrossSellingProductsConstants::CROSS_SELLING_PRODUCTS_FILTER_SIZE_FOR,
-            ProductViewCrossSellingProductsConstants::CROSS_SELLING_PRODUCTS_FILTER_SIZE_FOR_VALUES
-        );
+        return $this->get(ProductViewCrossSellingProductsConstants::MODEL_KEYS_FOR_SIZE_FILTER, []);
     }
 }

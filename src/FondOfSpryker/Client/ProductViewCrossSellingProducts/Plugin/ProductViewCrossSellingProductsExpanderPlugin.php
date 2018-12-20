@@ -11,7 +11,6 @@ use Spryker\Client\ProductStorageExtension\Dependency\Plugin\ProductViewExpander
  */
 class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin implements ProductViewExpanderPluginInterface
 {
-    public const MODEL = 'model';
     public const MODEL_KEY = 'model_key';
     public const SIZE_KEY = 'size';
 
@@ -31,13 +30,15 @@ class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin imple
     {
         $config = $this->getFactory()->createProductViewCrossSellingProductsFactory();
         $modelKey = $productViewTransfer->getAttributes()[self::MODEL_KEY];
-        $search = [self::MODEL => $productViewTransfer->getAttributes()[self::MODEL]];
+        $search = [self::MODEL_KEY => $productViewTransfer->getAttributes()[self::MODEL_KEY]];
 
-        if (in_array($modelKey, $config->getFilterSizeForModelKeys())) {
+        if (in_array($modelKey, $config->getModelKeysForSizeFilter())) {
             $search[self::SIZE_KEY] = $config->getDefaultSize();
         }
 
-        $results = $this->getFactory()->getCatalogClient()->catalogSearch('', $search);
+        $results = $this->getFactory()
+            ->getCatalogClient()
+            ->catalogSearch('', $search);
 
         return $productViewTransfer->setCrossSellingProducts($results);
     }
