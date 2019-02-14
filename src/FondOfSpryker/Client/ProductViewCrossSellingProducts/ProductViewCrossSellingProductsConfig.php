@@ -8,6 +8,14 @@ use Spryker\Client\Kernel\AbstractBundleConfig;
 class ProductViewCrossSellingProductsConfig extends AbstractBundleConfig
 {
     /**
+     * @return array
+     */
+    public function getModelsFilterSize(): array
+    {
+        return $this->get(ProductViewCrossSellingProductsConstants::CROSS_SELLING_MODELS_FILTER_SIZE, []);
+    }
+
+    /**
      * @return string
      */
     public function getDefaultSize(): string
@@ -23,6 +31,6 @@ class ProductViewCrossSellingProductsConfig extends AbstractBundleConfig
      */
     public function getModelKeysForSizeFilter(): array
     {
-        return $this->get(ProductViewCrossSellingProductsConstants::MODEL_KEYS_FOR_SIZE_FILTER, []);
+        return $this->get(ProductViewCrossSellingProductsConstants::MODEL_KEYS_FOR_SIZE_FILTER, ProductViewCrossSellingProductsConstants::CROSS_SELLING_PRODUCTS_FILTER_SIZE_FOR_VALUES);
     }
 }

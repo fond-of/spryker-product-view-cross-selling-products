@@ -32,8 +32,10 @@ class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin imple
         $modelKey = $productViewTransfer->getAttributes()[self::MODEL_KEY];
         $search = [self::MODEL_KEY => $productViewTransfer->getAttributes()[self::MODEL_KEY]];
 
-        if (in_array($modelKey, $config->getModelKeysForSizeFilter())) {
-            $search[self::SIZE_KEY] = $config->getDefaultSize();
+        if (array_key_exists($modelKey, $config->getModelsFilterSize())) {
+            if (array_key_exists(static::SIZE_KEY, $config->getModelsFilterSize()[$modelKey])) {
+                $search[self::SIZE_KEY] = $config->getModelsFilterSize()[$modelKey][self::SIZE_KEY];
+            }
         }
 
         $results = $this->getFactory()
