@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Client\ProductViewCrossSellingProducts\Plugin;
 
+use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\ProductStorageExtension\Dependency\Plugin\ProductViewExpanderPluginInterface;
@@ -11,36 +12,33 @@ use Spryker\Client\ProductStorageExtension\Dependency\Plugin\ProductViewExpander
  */
 class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin implements ProductViewExpanderPluginInterface
 {
-    public const MODEL_KEY = 'model_key';
-    public const SIZE_KEY = 'size';
-
     /**
-     * Specification:
-     * - Expands and returns the provided ProductView transfer objects.
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      * @param array $productData
      * @param string $localeName
      *
      * @return \Generated\Shared\Transfer\ProductViewTransfer
      */
-    public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName)
+    public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName): ProductViewTransfer
     {
-        $config = $this->getFactory()->createProductViewCrossSellingProductsFactory();
-        $modelKey = $productViewTransfer->getAttributes()[self::MODEL_KEY];
-        $search = [self::MODEL_KEY => $productViewTransfer->getAttributes()[self::MODEL_KEY]];
+        $config = $this->getFactory()->getProductViewCrossSellingProductsConfig();
+
+        if (!array_key_exists(PageIndexMap::MODEL_KEY, $productViewTransfer->getAttributes())) {
+            return $productViewTransfer;
+        }
+
+        $modelKey = $productViewTransfer->getAttributes()[PageIndexMap::MODEL_KEY];
+        $searchParameters = [PageIndexMap::MODEL_KEY => $productViewTransfer->getAttributes()[PageIndexMap::MODEL_KEY]];
 
         if (array_key_exists($modelKey, $config->getModelsFilterSize())) {
-            if (array_key_exists(static::SIZE_KEY, $config->getModelsFilterSize()[$modelKey])) {
-                $search[self::SIZE_KEY] = $config->getModelsFilterSize()[$modelKey][self::SIZE_KEY];
+            if (array_key_exists(PageIndexMap::SIZE, $config->getModelsFilterSize()[$modelKey])) {
+                $searchParameters[PageIndexMap::SIZE] = $config->getModelsFilterSize()[$modelKey][PageIndexMap::SIZE];
             }
         }
 
         $results = $this->getFactory()
             ->getCatalogClient()
-            ->catalogSearch('', $search);
+            ->catalogSearch('', $searchParameters);
 
         return $productViewTransfer->setCrossSellingProducts($results);
     }

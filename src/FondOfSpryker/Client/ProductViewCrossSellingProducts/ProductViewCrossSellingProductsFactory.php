@@ -4,7 +4,6 @@ namespace FondOfSpryker\Client\ProductViewCrossSellingProducts;
 
 use FondOfSpryker\Client\ProductViewCrossSellingProducts\Dependency\Client\ProductViewCrossSellingProductsToCatalogClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
-use FondOfSpryker\Client\ProductViewCrossSellingProducts\ProductViewCrossSellingProductsConfig;
 
 class ProductViewCrossSellingProductsFactory extends AbstractFactory
 {
@@ -19,7 +18,7 @@ class ProductViewCrossSellingProductsFactory extends AbstractFactory
     /**
      * @return \FondOfSpryker\Client\ProductViewCrossSellingProducts\ProductViewCrossSellingProductsConfig
      */
-    public function createProductViewCrossSellingProductsFactory(): ProductViewCrossSellingProductsConfig
+    public function getProductViewCrossSellingProductsConfig(): ProductViewCrossSellingProductsConfig
     {
         return $this->getConfig();
     }
