@@ -13,8 +13,8 @@
   "require": {
     "php": ">=7.1",
     "spryker/catalog": "^5.3.0",
-    "fond-of-spryker/product-page-search-model-key": "dev-master",
-    "fond-of-spryker/product-page-search-size": "dev-master"
+    "fond-of-spryker/product-page-search-model-key": "dev-spryker_upgrade",
+    "fond-of-spryker/product-page-search-size": "dev-spryker_upgrade"
   },
   "require-dev": {
     "spryker/code-sniffer": "^0.14.7",
