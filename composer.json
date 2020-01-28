@@ -11,8 +11,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": ">=7.1",
-    "spryker/catalog": "^5.3.0",
+    "php": ">=7.2",
+    "spryker/catalog": "^5.6.0",
     "fond-of-spryker/product-page-search-model-key": "dev-spryker_upgrade",
     "fond-of-spryker/product-page-search-size": "dev-spryker_upgrade"
   },
@@ -23,7 +23,7 @@
     "phpro/grumphp": "^0.14",
     "sebastian/phpcpd": "^4.1",
     "php-coveralls/php-coveralls": "^2.0",
-    "spryker/kernel": "^3.37.5",
+    "spryker/kernel": "^3.42.4",
     "spryker/application": "^3.19.0"
   },
   "autoload": {
