@@ -12,8 +12,6 @@ class ProductViewCrossSellingProductsToCatalogClientBridge implements ProductVie
     protected $catalogClient;
 
     /**
-     * ProductDetailPageToCatalogClientBridge constructor.
-     *
      * @param \Spryker\Client\Catalog\CatalogClientInterface $catalogClient
      */
     public function __construct(CatalogClientInterface $catalogClient)
