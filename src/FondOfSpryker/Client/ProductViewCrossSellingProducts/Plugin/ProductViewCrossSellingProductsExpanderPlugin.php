@@ -21,12 +21,11 @@ class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin imple
      */
     public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName): ProductViewTransfer
     {
-        $config = $this->getFactory()->getProductViewCrossSellingProductsConfig();
-
         if (!array_key_exists(ProductViewCrossSellingProductsConstants::MODEL_KEY, $productViewTransfer->getAttributes())) {
-            return $productViewTransfer;
+            return $productViewTransfer->setCrossSellingProducts(['products' => []]);
         }
 
+        $config = $this->getFactory()->getProductViewCrossSellingProductsConfig();
         $modelKey = $productViewTransfer->getAttributes()[ProductViewCrossSellingProductsConstants::MODEL_KEY];
         $searchParameters = [ProductViewCrossSellingProductsConstants::MODEL_KEY => $productViewTransfer->getAttributes()[ProductViewCrossSellingProductsConstants::MODEL_KEY]];
 
