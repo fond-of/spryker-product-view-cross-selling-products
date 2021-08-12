@@ -5,6 +5,9 @@ namespace FondOfSpryker\Client\ProductViewCrossSellingProducts;
 use FondOfSpryker\Client\ProductViewCrossSellingProducts\Dependency\Client\ProductViewCrossSellingProductsToCatalogClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
 
+/**
+ * @method \FondOfSpryker\Client\ProductViewCrossSellingProducts\ProductViewCrossSellingProductsConfig getConfig()
+ */
 class ProductViewCrossSellingProductsFactory extends AbstractFactory
 {
     /**

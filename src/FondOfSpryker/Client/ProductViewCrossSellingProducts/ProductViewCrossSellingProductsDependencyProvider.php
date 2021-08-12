@@ -11,11 +11,15 @@ class ProductViewCrossSellingProductsDependencyProvider extends AbstractDependen
     public const CLIENT_CATALOG = 'CLIENT_CATALOG';
 
     /**
-     * @return void
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
      */
     public function provideServiceLayerDependencies(Container $container)
     {
         $this->addCatalogClient($container);
+
+        return $container;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Client\ProductViewCrossSellingProducts\Plugin;
 
-use Generated\Shared\Search\PageIndexMap;
+use FondOfSpryker\Shared\ProductViewCrossSellingProducts\ProductViewCrossSellingProductsConstants;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\ProductStorageExtension\Dependency\Plugin\ProductViewExpanderPluginInterface;
@@ -21,18 +21,17 @@ class ProductViewCrossSellingProductsExpanderPlugin extends AbstractPlugin imple
      */
     public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName): ProductViewTransfer
     {
-        $config = $this->getFactory()->getProductViewCrossSellingProductsConfig();
-
-        if (!array_key_exists(PageIndexMap::MODEL_KEY, $productViewTransfer->getAttributes())) {
-            return $productViewTransfer;
+        if (!array_key_exists(ProductViewCrossSellingProductsConstants::MODEL_KEY, $productViewTransfer->getAttributes())) {
+            return $productViewTransfer->setCrossSellingProducts(['products' => []]);
         }
 
-        $modelKey = $productViewTransfer->getAttributes()[PageIndexMap::MODEL_KEY];
-        $searchParameters = [PageIndexMap::MODEL_KEY => $productViewTransfer->getAttributes()[PageIndexMap::MODEL_KEY]];
+        $config = $this->getFactory()->getProductViewCrossSellingProductsConfig();
+        $modelKey = $productViewTransfer->getAttributes()[ProductViewCrossSellingProductsConstants::MODEL_KEY];
+        $searchParameters = [ProductViewCrossSellingProductsConstants::MODEL_KEY => $productViewTransfer->getAttributes()[ProductViewCrossSellingProductsConstants::MODEL_KEY]];
 
         if (array_key_exists($modelKey, $config->getModelsFilterSize())) {
-            if (array_key_exists(PageIndexMap::SIZE, $config->getModelsFilterSize()[$modelKey])) {
-                $searchParameters[PageIndexMap::SIZE] = $config->getModelsFilterSize()[$modelKey][PageIndexMap::SIZE];
+            if (array_key_exists(ProductViewCrossSellingProductsConstants::SIZE, $config->getModelsFilterSize()[$modelKey])) {
+                $searchParameters[ProductViewCrossSellingProductsConstants::SIZE] = $config->getModelsFilterSize()[$modelKey][ProductViewCrossSellingProductsConstants::SIZE];
             }
         }
 

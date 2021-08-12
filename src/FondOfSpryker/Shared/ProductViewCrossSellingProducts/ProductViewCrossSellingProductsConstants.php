@@ -18,4 +18,7 @@ interface ProductViewCrossSellingProductsConstants
     ];
 
     public const MODEL_KEYS_FOR_SIZE_FILTER = 'MODEL_KEYS_FOR_SIZE_FILTER';
+
+    public const MODEL_KEY = 'model_key';
+    public const SIZE = 'size';
 }
